@@ -1,0 +1,101 @@
+<form
+  [formGroup]="bookEditorForm"
+  #formDirective="ngForm"
+  (ngSubmit)="submitBook(formDirective)"
+>
+  <div class="grid-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter title of book</mat-label>
+      <input matInput placeholder="Title..." formControlName="title" required />
+      @if (bookEditorForm.controls.title.invalid) {
+      <mat-error> Title can't be empty</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Author's Name</mat-label>
+      <input matInput placeholder="Name..." formControlName="author" required />
+      @if (bookEditorForm.controls.author.invalid &&
+      !bookEditorForm.controls.author.untouched) {
+      <mat-error> Author's name can't be empty</mat-error>
+      }
+    </mat-form-field>
+    <div class="upload-file">
+      <input
+        hidden
+        type="file"
+        #imgFileInput
+        (change)="onImageSelected($event)"
+      />
+      <button type="button" mat-raised-button (click)="imgFileInput.click()">
+        Upload image
+      </button>
+      @if(this.bookEditorForm.controls.imageUrl.value) {
+      <div class="file-name">
+        <span>{{ this.bookEditorForm.controls.imageName.value }} </span>
+        <button
+          mat-icon-button
+          aria-label="Remove image"
+          class="remove-btn"
+          type="button"
+          (click)="removeImage()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <img
+        [src]="this.bookEditorForm.controls.imageUrl.value"
+        alt="book-cover"
+        width="100"
+        height="100"
+      />
+      } @else {
+      <mat-label>Only .png, .jpg format</mat-label>
+      } @if(this.fileError) {
+      <mat-label class="warn-text">{{ this.fileError }}</mat-label>
+      }
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Date of publication</mat-label>
+      <input
+        matInput
+        [matDatepicker]="publicDate"
+        formControlName="publicationDate"
+        placeholder="12/24/1988"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="publicDate"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #publicDate></mat-datepicker>
+      @if (bookEditorForm.controls.publicationDate.invalid &&
+      !bookEditorForm.controls.author.untouched) {
+      <mat-error> Publication date can't be empty </mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline" class="desc-field">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Addintional information..."
+      formControlName="description"
+    ></textarea>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-flat-button color="warn" type="button" (click)="onCancel()">
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      class="submit-btn"
+      type="submit"
+      [disabled]="!bookEditorForm.valid"
+    >
+      {{ book ? "Edit" : "Create" }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,35 @@
+<mat-card appearance="outlined" class="book">
+  <div class="image-container">
+    @if(bookInfo.imageUrl) {
+    <img [src]="bookInfo.imageUrl" alt="book-cover" />
+    } @else {
+    <div class="no-image">
+      <mat-icon>broken_image</mat-icon>
+    </div>
+    }
+  </div>
+  <mat-card-content>
+    <h4 class="info-text title">{{ bookInfo.title }}</h4>
+    <div class="info">
+      <mat-icon class="info-icon">history_edu</mat-icon>
+      <p class="info-text">{{ bookInfo.author }}</p>
+    </div>
+    <div class="info">
+      <mat-icon class="info-icon">event</mat-icon>
+      <p class="info-text">
+        {{ bookInfo.publicationDate | date : "MMMM dd, yyyy" }}
+      </p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button aria-label="Edit button" (click)="editBook()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Delete button" (click)="deleteBook()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Menu button" (click)="opentDetials()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

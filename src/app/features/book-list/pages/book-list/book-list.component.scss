@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  margin: 180px auto;
+  width: 80%;
+}
+
+mat-accordion {
+  margin-top: 10px;
+}
+
+.book-list {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+app-book {
+  display: block;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,53 @@
+.book {
+  width: 272px;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  & > * {
+    width: 250px;
+    height: 300px;
+    border-radius: 20px;
+    margin: 10px;
+  }
+}
+
+.no-image {
+  background-color: gainsboro;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > mat-icon {
+    color: gray;
+    font-size: 4rem;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.info-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  margin: 0;
+}
+
+.title {
+  width: 240px;
+}
+
+.info-icon {
+  color: gray;
+  padding: 4px;
+}

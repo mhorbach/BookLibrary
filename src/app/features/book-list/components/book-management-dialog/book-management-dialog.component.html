@@ -1,0 +1,48 @@
+@if (editingState) {
+<app-book-management-panel
+  [isDialog]="true"
+  [book]="book"
+  (saveEvent)="saveBookChanges($event)"
+  (cancelEvent)="changeEditingState()"
+></app-book-management-panel>
+} @else {
+<mat-dialog-content>
+  <div class="dialog-header">
+    <h3>{{ book.author }}</h3>
+    <strong>{{ book.publicationDate | date : "MMMM dd, yyyy" }}</strong>
+  </div>
+
+  @if (book.imageUrl) {
+  <img [src]="book.imageUrl" alt="book-cover" class="book-cover" />
+  }
+  <h2>
+    {{ book.title }}
+  </h2>
+
+  <p>
+    {{ book.description }}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <div>
+    <button
+      mat-icon-button
+      aria-label="Edit button"
+      (click)="changeEditingState()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="Delete button"
+      [mat-dialog-close]="true"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Menu button">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</mat-dialog-actions>
+}

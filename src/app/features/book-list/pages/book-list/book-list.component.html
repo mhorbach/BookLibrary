@@ -1,0 +1,18 @@
+<div class="list-header">
+  <button mat-flat-button (click)="createBook()">Add book</button>
+  <mat-form-field>
+    <mat-label>Search Book</mat-label>
+    <input type="text" matInput [formControl]="searchFormControl" />
+  </mat-form-field>
+</div>
+<div class="book-list">
+  @for (book of filteredBooks; track book.id) {
+  <app-book
+    @animatedBook
+    [bookInfo]="book"
+    (deleteBookEvent)="deleteBook($event)"
+    (openDetailsEvent)="openDetails($event)"
+  >
+  </app-book>
+  }
+</div>

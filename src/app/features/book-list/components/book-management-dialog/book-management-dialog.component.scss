@@ -1,0 +1,26 @@
+.dialog-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: start;
+  gap: 10px;
+
+  & > h3 {
+    margin: 0;
+  }
+
+  & > strong {
+    font-size: 1.2rem;
+    color: gray;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-cover {
+  height: 300px;
+  width: 250px;
+  border-radius: 20px;
+}
