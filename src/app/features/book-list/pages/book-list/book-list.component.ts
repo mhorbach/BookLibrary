@@ -9,9 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookManagementDialogComponent } from '../../components/book-management-dialog/book-management-dialog.component';
 import {
   animate,
-  animateChild,
-  query,
-  stagger,
   style,
   transition,
   trigger,
@@ -20,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-book-list',
@@ -28,20 +26,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     BookComponent,
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    ReactiveFormsModule,
+    MatIconModule
   ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss',
   animations: [
-    trigger('animatedBookList', [
-      transition('* <=> *', [
-        query('@animatedBook', stagger(100, animateChild()), {
-          optional: true,
-        }),
-      ]),
-    ]),
     trigger('animatedBook', [
       transition(':enter', [
         style({ opacity: 0 }),
@@ -76,7 +68,7 @@ export class BookListComponent implements OnInit {
   deleteBook(id: number): void {
     this.bookStorage.deleteBook(id);
     this.getBooks();
-    this.filteredBooks = this.books;
+    this.filteredBooks = this.filteredBooks.filter(book => book.id !== id);
   }
 
   getBooks(): void {
@@ -110,5 +102,9 @@ export class BookListComponent implements OnInit {
           book.author.toLowerCase().includes(search.toLowerCase())
       );
     }
+  }
+
+  cleanSearch(): void {
+    this.searchFormControl.patchValue('');
   }
 }
